@@ -9,15 +9,55 @@ const GUEST_MIN = 1;
 const GUEST_MAX = 100;
 const PRICE_MIN = 1;
 const PRICE_MAX = 1000000;
-const titleList = ['Введите текст', 'Заполните пусты поля', 'Заполните пустую форму', 'Отсутствует информация'];
-const typeOfFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
+const titlesList = [
+  'Введите текст',
+  'Заполните пусты поля',
+  'Заполните пустую форму',
+  'Отсутствует информация'
+];
+
+const typeOfFeatures = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner'
+];
+
+const typeOfRooms = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+  'hotel'
+];
+
+const checkinVariants = [
+  '12:00',
+  '13:00',
+  '14:00'
+];
+
+const checkoutVariants = [
+  '12:00',
+  '13:00',
+  '14:00'
+];
+
+const photoVariants = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+];
 
 const getRandomPositiveFloat = (a, b, digits = 1) => {
   const lower = Math.min(Math.abs(a), Math.abs(b));
   const upper = Math.max(Math.abs(a), Math.abs(b));
   const result = Math.random() * (upper - lower) + lower;
   return result.toFixed(digits);
-}
+};
 
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -36,5 +76,47 @@ const getFeatures = () => {
   return featureChoice;
 };
 
-//author = {
-//avatar: `img/avatars/user${value < 10 ? `0${value}` : value}.png`
+const generateOffer = (address) => {
+  const offer = {
+    title: titlesList[getRandomPositiveInteger(0, titlesList.length - 1)],
+    address,
+    price: getRandomPositiveInteger(PRICE_MIN, PRICE_MAX),
+    rooms: getRandomPositiveInteger(0, typeOfRooms.length - 1),
+    guests: getRandomPositiveInteger(GUEST_MIN, GUEST_MAX),
+    checkin: checkinVariants[getRandomPositiveInteger(0, checkinVariants.length)],
+    checkout: checkoutVariants[getRandomPositiveInteger(0, checkoutVariants.length)],
+    features: getFeatures(),
+    description: ' Клуб Отель Мирамар — прекрасный выбор для тех, кто хочет восстановить силы.',
+    photos: photoVariants[getRandomPositiveInteger(0, photoVariants.length - 1)]
+  };
+  return offer;
+};
+
+const generateAd = (param) => {
+  const value = param + 1;
+  const locationObj = {
+    lat: getRandomPositiveFloat(LAT_MIN, LAT_MAX, LAT_ROUNDING),
+    lng: getRandomPositiveFloat(LNG_MIN, LNG_MAX, LNG_ROUNDING)
+  };
+
+  const address = `${locationObj.lat},${locationObj.lng}`;
+
+  return {
+    author: {
+      avatar: `img/avatars/user${value < 10 ? `0${value}` : value}.png`
+    },
+    offer: generateOffer(param, address),
+    location: locationObj
+  };
+};
+
+const generateAds = (generateNum = DEFAULT_GENERATE_NUM) => {
+  const ads = [];
+  for (let index = 0; index < generateNum; index++){
+    ads[index] = generateAd(index);
+  }
+
+  return ads;
+};
+
+generateAds();
