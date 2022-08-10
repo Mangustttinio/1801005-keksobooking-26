@@ -67,6 +67,7 @@ const generateOffer = (address) => {
     address,
     price: getRandomPositiveInteger(PRICE_MIN, PRICE_MAX),
     rooms: getRandomPositiveInteger(0, typeOfRooms.length - 1),
+    types: getRandomElementFromArray(typeOfRooms),
     guests: getRandomPositiveInteger(GUEST_MIN, GUEST_MAX),
     checkin: getRandomElementFromArray(checkinVariants),
     checkout: getRandomElementFromArray(checkoutVariants),

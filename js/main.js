@@ -1,5 +1,8 @@
 import {
-  getPopup
+  renderPopup
 } from './create-data/create-card.js';
+import {
+  generateAds
+} from './create-data/generate-ads.js';
 
-getPopup();
+renderPopup(generateAds(1));
