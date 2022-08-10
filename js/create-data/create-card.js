@@ -29,7 +29,12 @@ const renderPopup = (array) => {
     });
     cardNode.querySelector('.popup__type').textContent = housingTypes[ads.offer.types];
     cardNode.querySelector('.popup__text--capacity').textContent = `Заезд после ${ads.offer.checkin} , выезд до ${ads.offer.checkout}`;
-    cardNode.querySelector('.popup__description').textContent = ads.offer.description;
+    cardNode.querySelector('.popup__description').textContent = '';
+    const descriptionCardNode = cardNode.querySelector('.popup__description');
+    const pDescription = document.createElement('p');
+    pDescription.textContent = newAds.offer.description;
+    pDescription.classList.add('popup__description');
+    descriptionCardNode.appendChild(pDescription);
     cardNode.querySelector('.popup__photo').textContent = ads.offer.photos;
     cardNode.querySelector('.popup__avatar').src = ads.author.avatar;
     cardTemplateFragment.appendChild(cardNode);
