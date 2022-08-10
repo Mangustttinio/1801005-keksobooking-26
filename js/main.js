@@ -1,3 +1,5 @@
-import { generateAds } from './create-data/generate-ads.js';
+import {
+  getPopup
+} from './create-data/create-card.js';
 
-generateAds();
+getPopup();
