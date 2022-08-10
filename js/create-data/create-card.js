@@ -20,8 +20,6 @@ const renderFeatures = (array,cardNode) => {
   });
 };
 
-const insertCardToMap = (card) => mapCanvas.appendChild(card);
-
 const renderPopup = (array) => {
   array.forEach((ads) =>{
     const cardNode = cardTemplate.cloneNode(true);
@@ -30,22 +28,22 @@ const renderPopup = (array) => {
     cardNode.querySelector('.popup__text--price').textContent = `${ads.offer.price}₽/ночь`;
     cardNode.querySelector('.popup__features').innerHTML = '';
     const featureCardNode = cardNode.querySelector('.popup__features');
-    const newAds = ads;
-    const featuresArray = newAds.offer.features;
-    renderFeatures(featuresArray, featureCardNode);
+    renderFeatures(ads.offer.features, featureCardNode);
     cardNode.querySelector('.popup__type').textContent = housingTypes[ads.offer.types];
-    cardNode.querySelector('.popup__text--capacity').textContent = `Заезд после ${ads.offer.checkin} , выезд до ${ads.offer.checkout}`;
+    cardNode.querySelector('.popup__text--capacity').textContent = `Заезд после ${ads.offer.checkin}, выезд до ${ads.offer.checkout}`;
     cardNode.querySelector('.popup__description').textContent = '';
     const descriptionCardNode = cardNode.querySelector('.popup__description');
     const pDescription = document.createElement('p');
-    pDescription.textContent = newAds.offer.description;
+    pDescription.textContent = ads.offer.description;
     pDescription.classList.add('popup__description');
     descriptionCardNode.appendChild(pDescription);
     cardNode.querySelector('.popup__photo').textContent = ads.offer.photos;
     cardNode.querySelector('.popup__avatar').src = ads.author.avatar;
     cardTemplateFragment.appendChild(cardNode);
   });
-  mapCanvas.appendChild(cardTemplateFragment);
+  return mapCanvas.appendChild(cardTemplateFragment);
 };
+
+const insertCardToMap = (card) => mapCanvas.appendChild(card);
 
 export {renderPopup, insertCardToMap};
