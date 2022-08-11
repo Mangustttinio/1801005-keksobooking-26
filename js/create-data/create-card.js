@@ -1,5 +1,4 @@
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const cardTemplateFragment = document.createDocumentFragment();
 const mapCanvas = document.querySelector('.map__canvas');
 
 const housingTypes = {
@@ -20,8 +19,9 @@ const renderFeatures = (array,cardNode) => {
   });
 };
 
-const renderPopup = (array) => {
-  array.forEach((ads) =>{
+const renderPopup = (ads) => {
+  const cardTemplateFragment = document.createDocumentFragment();
+  //array.forEach((ads) =>{
     const cardNode = cardTemplate.cloneNode(true);
     cardNode.querySelector('.popup__title').textContent = ads.offer.title;
     cardNode.querySelector('.popup__text--address').textContent = ads.offer.address;
@@ -40,7 +40,7 @@ const renderPopup = (array) => {
     cardNode.querySelector('.popup__photo').textContent = ads.offer.photos;
     cardNode.querySelector('.popup__avatar').src = ads.author.avatar;
     cardTemplateFragment.appendChild(cardNode);
-  });
+  //});
   return mapCanvas.appendChild(cardTemplateFragment);
 };
 
