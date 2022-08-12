@@ -60,6 +60,7 @@ const photoVariants = [
 const getRandomElementFromArray = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
 
 const getFeatures = () => featureType.filter(()=> Math.random() >= 0.5);
+const getPhotos = () => photoVariants.filter(()=> Math.random() >= 0.5);
 
 const generateOffer = (address) => {
   const offer = {
@@ -73,7 +74,7 @@ const generateOffer = (address) => {
     checkout: getRandomElementFromArray(checkoutVariants),
     features: getFeatures(),
     description: ' Клуб Отель Мирамар — прекрасный выбор для тех, кто хочет восстановить силы.',
-    photos: photoVariants.filter(()=> Math.random() >= 0.5)
+    photos: getPhotos()
   };
   return offer;
 };

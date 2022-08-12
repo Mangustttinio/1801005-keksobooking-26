@@ -1,9 +1,4 @@
-const getTemplateElement = (selector) => {
-  const templateElement = document.querySelector(selector);
-  if (templateElement && templateElement.content.children) {
-    return templateElement.content.children[0];
-  }
-};
+import { getTemplateElement } from '../utils.js';
 
 const cardTemplate = getTemplateElement('#card');
 const mapCanvas = document.querySelector('.map__canvas');
@@ -23,7 +18,16 @@ const createFeatureElement = (featureName) => {
   return featureElement;
 };
 
-const createFeatureElements = (features) => features.map(createFeatureElement);
+const createPhotoElement = (PhotoSrc) => {
+  const photoElement = document.createElement('img');
+  photoElement.classList.add('popup__photo');
+  photoElement.width = '45';
+  photoElement.height = '40';
+  photoElement.src = PhotoSrc;
+  return photoElement;
+};
+
+const createElements = (element, func) => element.map(func);
 
 const setAttribute = (element) => (selector, data, attr = 'textContent') => {
   if (element && data) {
@@ -36,21 +40,21 @@ const setAttribute = (element) => (selector, data, attr = 'textContent') => {
 
 const createPopupElement = (ads) => {
   const cardNode = cardTemplate.cloneNode(true);
-  setAttribute(
-    cardNode.querySelector('popup__title'), ads.offer.title);
   const setCardAttribute = setAttribute(cardNode);
+  setCardAttribute('popup__title', ads.offer.title);
   setCardAttribute('.popup__title', ads.offer.title);
   setCardAttribute('.popup__text--address', ads.offer.address);
   setCardAttribute('.popup__text--price', `${ads.offer.price}₽/ночь`);
   setCardAttribute('.popup__type', housingTypes[ads.offer.types]);
   setCardAttribute('.popup__text--capacity', `Заезд после ${ads.offer.checkin}, выезд до ${ads.offer.checkout}`);
   setCardAttribute('.popup__description', ads.offer.description);
-
-  cardNode.querySelector('.popup__avatar').src = ads.author.avatar;
+  setCardAttribute('.popup__avatar', ads.author.avatar, 'src');
 
   cardNode.querySelector('.popup__features').innerHTML = '';
-  cardNode.querySelector('.popup__features').append(...createFeatureElements(ads.offer.features));
-  cardNode.querySelector('.popup__photo').textContent = ads.offer.photos;
+  cardNode.querySelector('.popup__features').append(...createElements(ads.offer.features, createFeatureElement));
+
+  cardNode.querySelector('.popup__photos').innerHTML = '';
+  cardNode.querySelector('.popup__photos').append(...createElements(ads.offer.photos, createPhotoElement));
   return cardNode;
 };
 
@@ -58,4 +62,4 @@ const renderPopup = (popup) => {
   mapCanvas.appendChild(popup);
 };
 
-export {createPopupElement, renderPopup};
+export { createPopupElement, renderPopup };
