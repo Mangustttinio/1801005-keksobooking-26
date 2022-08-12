@@ -25,13 +25,7 @@ const createFeatureElement = (featureName) => {
 
 const createFeatureElements = (features) => features.map(createFeatureElement);
 
-const setAttribute = (element, data, attr = 'textContent') => {
-  if (element && data) {
-    element[attr] = data;
-  }
-};
-
-const setAttributeV2 = (element) => (selector, data, attr = 'textContent') => {
+const setAttribute = (element) => (selector, data, attr = 'textContent') => {
   if (element && data) {
     const subElement = element.querySelector(selector);
     if (subElement) {
@@ -44,7 +38,7 @@ const createPopupElement = (ads) => {
   const cardNode = cardTemplate.cloneNode(true);
   setAttribute(
     cardNode.querySelector('popup__title'), ads.offer.title);
-  const setCardAttribute = setAttributeV2(cardNode);
+  const setCardAttribute = setAttribute(cardNode);
   setCardAttribute('.popup__title', ads.offer.title);
   setCardAttribute('.popup__text--address', ads.offer.address);
   setCardAttribute('.popup__text--price', `${ads.offer.price}₽/ночь`);
