@@ -88,7 +88,7 @@ const generateAd = (index) => {
 
   return {
     author: {
-      avatar: `img/avatars/user${index < 10 ? `0${index}` : index}.png`
+      avatar: `img/avatars/user${index < 10 ? `0${index +1}` : index + 1}.png`
     },
     offer: generateOffer(address),
     location: locationObj
