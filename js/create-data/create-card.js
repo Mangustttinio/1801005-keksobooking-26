@@ -56,7 +56,6 @@ const createPopupElement = (ads) => {
 
   cardNode.querySelector('.popup__features').innerHTML = '';
   cardNode.querySelector('.popup__features').append(...createFeatureElements(ads.offer.features));
-  console.log(...createFeatureElements(ads.offer.features));
   cardNode.querySelector('.popup__photo').textContent = ads.offer.photos;
   return cardNode;
 };
