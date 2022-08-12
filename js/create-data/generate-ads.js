@@ -60,6 +60,7 @@ const photoVariants = [
 const getRandomElementFromArray = (array) => array[getRandomPositiveInteger(0, array.length - 1)];
 
 const getFeatures = () => featureType.filter(()=> Math.random() >= 0.5);
+const getPhotos = () => photoVariants.filter(()=> Math.random() >= 0.5);
 
 const generateOffer = (address) => {
   const offer = {
@@ -67,12 +68,13 @@ const generateOffer = (address) => {
     address,
     price: getRandomPositiveInteger(PRICE_MIN, PRICE_MAX),
     rooms: getRandomPositiveInteger(0, typeOfRooms.length - 1),
+    types: getRandomElementFromArray(typeOfRooms),
     guests: getRandomPositiveInteger(GUEST_MIN, GUEST_MAX),
     checkin: getRandomElementFromArray(checkinVariants),
     checkout: getRandomElementFromArray(checkoutVariants),
     features: getFeatures(),
     description: ' Клуб Отель Мирамар — прекрасный выбор для тех, кто хочет восстановить силы.',
-    photos: photoVariants.filter(()=> Math.random() >= 0.5)
+    photos: getPhotos()
   };
   return offer;
 };
@@ -87,7 +89,7 @@ const generateAd = (index) => {
 
   return {
     author: {
-      avatar: `img/avatars/user${index < 10 ? `0${index}` : index}.png`
+      avatar: `img/avatars/user${index < 10 ? `0${index +1}` : index + 1}.png`
     },
     offer: generateOffer(address),
     location: locationObj
