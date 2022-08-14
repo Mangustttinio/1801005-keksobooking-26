@@ -9,6 +9,12 @@ import {
   formActivation,
   //formDeactivation
 } from './create-data/form-conditions.js';
+import {
+  validateLength,
+  validatePrice,
+  regulateButtons
+} from './create-data/form-validation.js';
+
 const ads = generateAds();
 const card = createPopupElement(ads[1]);
 renderPopup(card);
@@ -19,40 +25,22 @@ const form = document.querySelector('.ad-form');
 const selectCapacity = form.querySelector('#capacity');
 const selectCapacityOption = selectCapacity.querySelectorAll('option');
 const selectRoomNumber = form.querySelector('#room_number');
-const selectRoomNumberOption = selectRoomNumber.querySelectorAll('option');
-const buttonUpload = document.querySelector('.ad-form__submit');
+//const buttonUpload = document.querySelector('.ad-form__submit');
 
-const roomNumberOption = {
-  1: [1],
-  2: [1,2],
-  3: [1,2,3],
-  100: [0]
-};
 
-selectRoomNumber.addEventListener('change', (event) => {
-  const capacity = roomNumberOption[event.target.value];
-  for (const iterator of selectCapacityOption) {
-    if (capacity.includes(Number(iterator.value))) {
-      iterator.removeAttribute('disabled');
-      selectCapacity.value = iterator.value;
-    }
-    else {
-      iterator.setAttribute('disabled', true);
-    }
-  }
-});
+regulateButtons (
+  selectRoomNumber,
+  selectCapacityOption,
+  selectCapacity
+);
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__block',
   errorTextParent: 'ad-form__block',
   errorTextClass: 'ad-form__error'
-}
+},
+false
 );
-
-
-const validateLength = (value) => value.length >= 30 && value.length <= 100;
-
-const validatePrice = (value) => value <= 100000;
 
 pristine.addValidator(
   form.querySelector('#title'),
@@ -69,18 +57,6 @@ pristine.addValidator(
 form.addEventListener('submit', () => {
   pristine.validate();
 });
-
-/*
-form.addEventListener('submit', (evt) => {
-  if (pristine.validate() === false ) {
-    evt.preventDefault();
-    buttonUpload.setAttribute('disabled', true);
-  }
-  else {
-    buttonUpload.removeAttribute('disabled');
-  }
-});
-*/
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
