@@ -105,7 +105,9 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__block">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="5000" required>
+          <input id="price" name="price" type="number" placeholder="5000" min="0" required
+          data-pristine-minlength-message="Минимальная длина 2 символа"
+          >
           <div class="ad-form__slider"></div>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
