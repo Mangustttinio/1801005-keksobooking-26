@@ -12,6 +12,8 @@ import {
 import {
   initFormValidation,
   regulateButtons,
+  regulateTimeIn,
+  regulateTimeOut,
 } from './form-validation.js';
 
 const ads = generateAds();
@@ -23,3 +25,7 @@ formActivation();
 initFormValidation();
 
 regulateButtons();
+
+regulateTimeOut();
+
+regulateTimeIn();
