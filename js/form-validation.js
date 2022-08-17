@@ -5,9 +5,7 @@ const selectRoomNumber = form.querySelector('#room_number');
 const selectPriceType = form.querySelector('#type');
 const inputPriceType = form.querySelector('#price');
 const selectTimeIn = form.querySelector('#timein');
-const selectTimeInOption = selectTimeIn.querySelectorAll('option');
 const selectTimeOut = form.querySelector('#timeout');
-const selectTimeOutOption = selectTimeOut.querySelectorAll('option');
 
 const roomNumberOption = {
   1: [1],
@@ -24,12 +22,6 @@ const minPrice = {
   palace: 10000
 };
 
-const timeMap = {
-  '12:00': '12:00',
-  '13:00': '13:00',
-  '14:00': '14:00'
-};
-
 const pristine = new Pristine(form, {
   classTo: 'ad-form__block',
   errorTextParent: 'ad-form__block',
@@ -41,27 +33,9 @@ const validateLength = (value) => value.length >= 30 && value.length <= 100;
 
 const validatePrice = (value) => value <= 100000;
 
-const regulateTimeOut = () => {
-  selectTimeIn.addEventListener('change', (event) => {
-    const targetTime = timeMap[event.target.value];
-    selectTimeOutOption.forEach((iterator) => {
-      if (iterator.value === targetTime) {
-        iterator.selected = true;
-      }
-    });
-  });
-};
+const onChangeTimeIn = (event) => selectTimeIn.value = event.target.value;
 
-const regulateTimeIn = () => {
-  selectTimeOut.addEventListener('change', (event) => {
-    const targetTime = timeMap[event.target.value];
-    selectTimeInOption.forEach((iterator) => {
-      if (iterator.value === targetTime) {
-        iterator.selected = true;
-      }
-    });
-  });
-};
+const onChangeTimeOut = (event) => selectTimeOut.value = event.target.value;
 
 const regulateButtons = () => {
   selectRoomNumber.addEventListener('change', (event) => {
@@ -93,6 +67,9 @@ form.addEventListener('submit', (evt) => {
 });
 
 const initFormValidation = () => {
+  selectTimeOut.addEventListener('change', onChangeTimeIn);
+  selectTimeIn.addEventListener('change', onChangeTimeOut);
+
   pristine.addValidator(
     form.querySelector('#title'),
     validateLength,
@@ -110,4 +87,4 @@ const initFormValidation = () => {
   );
 };
 
-export {validateLength, validatePrice, regulateButtons, initFormValidation, regulateTimeOut, regulateTimeIn};
+export {regulateButtons, initFormValidation};
