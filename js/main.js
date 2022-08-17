@@ -10,6 +10,7 @@ import {
   //formDeactivation
 } from './form-conditions.js';
 import {
+  initFormValidation,
   regulateButtons
 } from './form-validation.js';
 
@@ -19,13 +20,7 @@ renderPopup(card);
 
 formActivation();
 
-const form = document.querySelector('.ad-form');
-const selectCapacity = form.querySelector('#capacity');
-const selectCapacityOption = selectCapacity.querySelectorAll('option');
-const selectRoomNumber = form.querySelector('#room_number');
+initFormValidation();
 
-regulateButtons (
-  selectRoomNumber,
-  selectCapacityOption,
-  selectCapacity
-);
+regulateButtons();
+
