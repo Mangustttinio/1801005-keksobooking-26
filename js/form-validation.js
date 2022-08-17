@@ -33,9 +33,9 @@ const validateLength = (value) => value.length >= 30 && value.length <= 100;
 
 const validatePrice = (value) => value <= 100000;
 
-const onChangeTimeIn = (event) => selectTimeIn.value = event.target.value;
+const onChangeTimeIn = (event) => { selectTimeIn.value = event.target.value; };
 
-const onChangeTimeOut = (event) => selectTimeOut.value = event.target.value;
+const onChangeTimeOut = (event) => { selectTimeOut.value = event.target.value; };
 
 const regulateButtons = () => {
   selectRoomNumber.addEventListener('change', (event) => {
