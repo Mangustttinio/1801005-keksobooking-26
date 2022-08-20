@@ -1,8 +1,8 @@
 import { renderPopup } from './create-data/create-card.js';
 
 const START_COORDINATES = {
-  lat: 35.42000,
-  lng: 139.25000,
+  lat: 35.68485,
+  lng: 139.753777,
 };
 
 const START_SCALE = 13;
@@ -43,7 +43,7 @@ const getMap = () => {
 
 const changeAddressField = (evt) => {
   const {lat, lng} = evt.target.getLatLng();
-  addressField.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}}`;
+  addressField.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 };
 
 const setHotelMarker = (hotel) => {
