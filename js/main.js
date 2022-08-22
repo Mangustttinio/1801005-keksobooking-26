@@ -7,7 +7,7 @@ import {
 } from './create-data/generate-ads.js';
 import {
   formActivation,
-  formDeactivation
+  //formDeactivation
 } from './form-conditions.js';
 import {
   initFormValidation,

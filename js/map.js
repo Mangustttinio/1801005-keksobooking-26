@@ -1,4 +1,4 @@
-import { renderPopup } from './create-data/create-card.js';
+import { createPopupElement } from './create-data/create-card.js';
 
 const START_COORDINATES = {
   lat: 35.68485,
@@ -47,10 +47,9 @@ const changeAddressField = (evt) => {
 };
 
 const setHotelMarker = (hotel) => {
-  const lat = hotel.location.lat;
-  const lng = hotel.location.lng;
+  const {location: {lat, lng}} = hotel;
   const marker = L.marker({lat, lng}, {icon: simplePinIcon});
-  marker.addTo(markerGroup).bindPopup(() => renderPopup(hotel));
+  marker.addTo(markerGroup).bindPopup(() => createPopupElement(hotel));
 };
 
 const resetMap = (hotels) => {
