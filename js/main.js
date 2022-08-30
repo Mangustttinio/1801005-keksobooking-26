@@ -2,7 +2,6 @@ import {
   generateAds
 } from './create-data/generate-ads.js';
 import {
-  doFetchPost,
   initFormValidation,
   regulateButtons
 } from './form-validation.js';
@@ -11,8 +10,11 @@ import {
   getPriceFromSlider
 } from './slider.js';
 import {
-  showAlert
-} from './utils.js';
+  getData
+} from './server-data.js';
+import {
+  doFetchPost
+} from './server-data.js';
 
 const ads = generateAds(10);
 
@@ -25,13 +27,6 @@ initMap(ads);
 
 getPriceFromSlider();
 
-fetch('https://26.javascript.pages.academy/keksobooking/data')
-  .then((response) => response.json())
-  .then((objects) => {
-    initMap(objects);
-  })
-  .catch(() => {
-    showAlert('Ошибка получения данных', 'red');
-  });
+getData();
 
 doFetchPost();
