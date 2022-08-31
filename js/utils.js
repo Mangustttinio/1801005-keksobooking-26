@@ -1,3 +1,10 @@
+import {
+  setAttribute
+} from './create-data/create-card.js';
+
+const form = document.querySelector('.ad-form');
+const resetButton = form.querySelector('.ad-form__reset');
+
 const getTemplateElement = (selector) => {
   const templateElement = document.querySelector(selector);
   if (templateElement && templateElement.content.children) {
@@ -23,4 +30,57 @@ const showAlert = (message,color) => {
 
 };
 
-export { showAlert, getTemplateElement};
+const prepareSuccessMessage = () => {
+  const success = getTemplateElement('#success');
+  const successNode = success.cloneNode(true);
+  const setNodeAttribute = setAttribute(successNode);
+  setNodeAttribute('success__message', 'Отправка была проведена успешно');
+  return successNode;
+};
+
+const getSuccessMessage = () => {
+  const successMessage = prepareSuccessMessage();
+  document.body.append(successMessage);
+  document.addEventListener('keydown', (event) => {
+    event.preventDefault();
+    if(event.key === 'Escape'){
+      successMessage.remove();
+    }
+  });
+  form.addEventListener('click', () => {
+    successMessage.remove();
+  });
+  form.reset();
+};
+
+const prepareErrorMessage = () => {
+  const error = getTemplateElement('#error');
+  const errorNode = error.cloneNode(true);
+  const setNodeAttribute = setAttribute(errorNode);
+  setNodeAttribute('error_message', 'Возникла ошибка при отправке');
+  return errorNode;
+};
+
+const getErrorMessage = () => {
+  const errorMessage = prepareErrorMessage();
+  document.body.append(errorMessage);
+  const errorButton = document.querySelector('.error__button');
+
+  errorButton.addEventListener('click', () => {
+    errorMessage.hidden = true;
+  });
+};
+
+const clickResetButton = () => {
+  resetButton.addEventListener('click', () => {
+    form.reset();
+  });
+};
+
+export {
+  showAlert,
+  getTemplateElement,
+  getErrorMessage,
+  getSuccessMessage,
+  clickResetButton
+};
