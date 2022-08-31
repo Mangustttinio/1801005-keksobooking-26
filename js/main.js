@@ -24,7 +24,6 @@ import {
 import {
   pristine
 } from './form-validation.js';
-const buttonSubmit = document.querySelector('.ad-form__submit');
 const ads = generateAds(10);
 const form = document.querySelector('.ad-form');
 
