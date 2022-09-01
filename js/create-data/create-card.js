@@ -62,4 +62,4 @@ const renderPopup = (popup) => {
   mapCanvas.appendChild(popup);
 };
 
-export { createPopupElement, renderPopup };
+export { createPopupElement, renderPopup, setAttribute };

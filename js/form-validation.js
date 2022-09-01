@@ -7,6 +7,7 @@ const inputPriceType = form.querySelector('#price');
 const selectTimeIn = form.querySelector('#timein');
 const selectTimeOut = form.querySelector('#timeout');
 
+
 const roomNumberOption = {
   1: [1],
   2: [1,2],
@@ -87,4 +88,4 @@ const initFormValidation = () => {
   );
 };
 
-export {regulateButtons, initFormValidation};
+export {regulateButtons, initFormValidation, pristine};
