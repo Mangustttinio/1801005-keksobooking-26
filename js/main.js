@@ -22,6 +22,9 @@ import {
   getErrorMessage
 } from './utils.js';
 import {
+  getFilteredMap
+} from './filter.js';
+import {
   pristine
 } from './form-validation.js';
 const ads = generateAds(10);
@@ -35,7 +38,7 @@ initMap(ads);
 
 getPriceFromSlider();
 
-getData(initMap, showAlert);
+getData(getFilteredMap, showAlert);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
