@@ -34,7 +34,7 @@ initFormValidation();
 
 regulateButtons();
 
-initMap(ads);
+//initMap(ads);
 
 getPriceFromSlider();
 

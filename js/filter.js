@@ -7,22 +7,16 @@ const housingRoom = mapFilter.querySelector('#housing-rooms');
 const housingGuest = mapFilter.querySelector('#housing-guests');
 const housingFeatures = Array.from(mapFilter.querySelectorAll('.map__checkbox'));
 
+const housingPriceFilters = {
+  low: (price) => price < 10000,
+  middle: (price) => price >= 10000 && price <= 50000,
+  high: (price) => price >= 10000,
+  any: () => true,
+};
+
 const filterHousingType = (place) => housingType.value === place.offer.type || housingType.value === 'any';
 
-const filterHousingPrice = (place) => {
-  if (housingPrice.value === 'low' && place.offer.price < 10000) {
-    return true;
-  }
-  if (housingPrice.value === 'middle' && place.offer.price >= 10000 && place.offer.price <= 50000) {
-    return true;
-  }
-  if (housingPrice.value === 'middle' && place.offer.price >= 10000) {
-    return true;
-  }
-  if (housingPrice.value === 'any') {
-    return true;
-  }
-};
+const filterHousingPrice = (price) => (housingPriceFilters[housingPrice.value] || (() => false))(price);
 
 const filterHousingRooms = (place) => {
   if (housingRoom.value === place.offer.rooms) {
@@ -43,7 +37,7 @@ const filterHousingGuests = (place) => {
 };
 
 const filterHousingFeatures = (place) => {
-  housingFeatures.forEach((feature) => {
+  housingFeatures.every((feature) => {
     if (feature.checked) {
       return place.offer.features.some((value) => value === feature.value);
     }
@@ -61,6 +55,9 @@ const filterPlaces = (places) => {
       && filterHousingFeatures(place);
     if (filter) {
       filteredPlaces.push(place);
+    }
+    if (filteredPlaces.length >= 10) {
+      break;
     }
   }
   return filteredPlaces;
