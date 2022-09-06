@@ -1,4 +1,5 @@
 import { initMap } from './map.js';
+import { debounce } from './utils.js';
 
 const mapFilter = document.querySelector('.map__filters');
 const housingType = mapFilter.querySelector('#housing-type');
@@ -7,19 +8,8 @@ const housingRoom = mapFilter.querySelector('#housing-rooms');
 const housingGuest = mapFilter.querySelector('#housing-guests');
 const housingFeatures = Array.from(mapFilter.querySelectorAll('.map__checkbox'));
 
-/*
-const housingPriceFilters = {
-  low: (price) => price < 10000,
-  middle: (price) => price >= 10000 && price <= 50000,
-  high: (price) => price >= 10000,
-  any: () => true,
-};
-*/
-
 const filterHousingType = (place) => housingType.value === place.offer.type || housingType.value === 'any';
-/*
-const filterHousingPrice = (price) => (housingPriceFilters[housingPrice.value] || (() => false))(price);
-*/
+
 const filterHousingPrice = (place) => {
   const price = place.offer.price;
   const typeOfPrice = housingPrice.value;
@@ -82,10 +72,10 @@ const filterPlaces = (places) => {
 };
 
 const getFilteredMap = (places) => {
-  mapFilter.addEventListener('change', () => {
+  mapFilter.addEventListener('change', debounce(() => {
     const filteredPlaces = filterPlaces(places);
     initMap(filteredPlaces);
-  });
+  }));
 };
 
 export {getFilteredMap};

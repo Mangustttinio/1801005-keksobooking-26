@@ -17,7 +17,6 @@ import {
   showAlert,
   getSuccessMessage,
   getErrorMessage,
-  debounce
 } from './utils.js';
 import {
   getFilteredMap
@@ -26,7 +25,7 @@ import {
   pristine
 } from './form-validation.js';
 
-const RERENDER_DELAY = 1000;
+
 const form = document.querySelector('.ad-form');
 
 initFormValidation();
@@ -35,10 +34,10 @@ regulateButtons();
 
 getPriceFromSlider();
 
-getData(debounce((ads) => {
+getData((ads) => {
   initMap(ads);
   getFilteredMap(ads);
-}, showAlert), RERENDER_DELAY);
+}, showAlert);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
