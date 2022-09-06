@@ -1,7 +1,4 @@
 import {
-  generateAds
-} from './create-data/generate-ads.js';
-import {
   initFormValidation,
   regulateButtons
 } from './form-validation.js';
@@ -19,7 +16,8 @@ import {
   clickResetButton,
   showAlert,
   getSuccessMessage,
-  getErrorMessage
+  getErrorMessage,
+  debounce
 } from './utils.js';
 import {
   getFilteredMap
@@ -27,18 +25,20 @@ import {
 import {
   pristine
 } from './form-validation.js';
-const ads = generateAds(10);
+
+const RERENDER_DELAY = 1000;
 const form = document.querySelector('.ad-form');
 
 initFormValidation();
 
 regulateButtons();
 
-//initMap(ads);
-
 getPriceFromSlider();
 
-getData(getFilteredMap, showAlert);
+getData(debounce((ads) => {
+  initMap(ads);
+  getFilteredMap(ads);
+}, showAlert), RERENDER_DELAY);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();

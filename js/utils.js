@@ -77,10 +77,19 @@ const clickResetButton = () => {
   });
 };
 
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
   showAlert,
   getTemplateElement,
   getErrorMessage,
   getSuccessMessage,
-  clickResetButton
+  clickResetButton,
+  debounce
 };
