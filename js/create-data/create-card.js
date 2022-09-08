@@ -51,8 +51,11 @@ const createPopupElement = (ads) => {
   setCardAttribute('.popup__avatar', ads.author.avatar, 'src');
 
   cardNode.querySelector('.popup__features').innerHTML = '';
-  cardNode.querySelector('.popup__features').append(...createElements(ads.offer.features, createFeatureElement));
-
+  if (ads.offer.feature === undefined) {
+    cardNode.querySelector('.popup__features').append('');
+  } else {
+    cardNode.querySelector('.popup__features').append(...createElements(ads.offer.features, createFeatureElement));
+  }
   cardNode.querySelector('.popup__photos').innerHTML = '';
   cardNode.querySelector('.popup__photos').append(...createElements(ads.offer.photos, createPhotoElement));
   return cardNode;
