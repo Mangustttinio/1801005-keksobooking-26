@@ -6,7 +6,8 @@ const selectPriceType = form.querySelector('#type');
 const inputPriceType = form.querySelector('#price');
 const selectTimeIn = form.querySelector('#timein');
 const selectTimeOut = form.querySelector('#timeout');
-
+const selectAddress = form.querySelector('#address');
+const selectTitle = form.querySelector('#title');
 
 const roomNumberOption = {
   1: [1],
@@ -24,23 +25,24 @@ const minPrice = {
 };
 
 const pristine = new Pristine(form, {
-  classTo: 'ad-form__block',
-  errorTextParent: 'ad-form__block',
+  classTo: 'ad-form__element',
+  errorTextParent: 'ad-form__element',
   errorTextClass: 'ad-form__error'
-}
-);
+});
 
 const validateLength = (value) => value.length >= 30 && value.length <= 100;
 
 const validatePrice = (value) => value <= 100000;
 
-const onChangeTimeIn = (event) => { selectTimeIn.value = event.target.value; };
+const onChangeTimeIn = (evt) => { selectTimeIn.value = evt.target.value; };
 
-const onChangeTimeOut = (event) => { selectTimeOut.value = event.target.value; };
+const onChangeTimeOut = (evt) => { selectTimeOut.value = evt.target.value; };
+
+const onChangeAddress = (value) => value.length > 0;
 
 const regulateButtons = () => {
-  selectRoomNumber.addEventListener('change', (event) => {
-    const capacity = roomNumberOption[event.target.value];
+  selectRoomNumber.addEventListener('change', (evt) => {
+    const capacity = roomNumberOption[evt.target.value];
     selectCapacityOption.forEach((iterator) => {
       if (capacity.includes(Number(iterator.value))) {
         iterator.removeAttribute('disabled');
@@ -72,12 +74,12 @@ const initFormValidation = () => {
   selectTimeIn.addEventListener('change', onChangeTimeOut);
 
   pristine.addValidator(
-    form.querySelector('#title'),
+    selectTitle,
     validateLength,
     'от 30 до 100 символов'
   );
   pristine.addValidator(
-    form.querySelector('#price'),
+    selectPriceType,
     validatePrice,
     'превышено допустимое значение цены'
   );
@@ -85,6 +87,11 @@ const initFormValidation = () => {
     inputPriceType,
     validateMinPrice,
     getAmountErrorMessage
+  );
+  pristine.addValidator(
+    selectAddress,
+    onChangeAddress,
+    'Попробуйте выбрать адрес меткой'
   );
 };
 

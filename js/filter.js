@@ -1,6 +1,10 @@
 import { initMap } from './map.js';
 import { debounce } from './utils.js';
 
+const LOW_PRICE = 10000;
+const MIDDLE_PRICE = 50000;
+const NUMBER_OF_PLACES = 10;
+
 const mapFilter = document.querySelector('.map__filters');
 const housingType = mapFilter.querySelector('#housing-type');
 const housingPrice = mapFilter.querySelector('#housing-price');
@@ -13,13 +17,13 @@ const filterHousingType = (place) => housingType.value === place.offer.type || h
 const filterHousingPrice = (place) => {
   const price = place.offer.price;
   const typeOfPrice = housingPrice.value;
-  if (typeOfPrice === 'low' && price < 10000) {
+  if (typeOfPrice === 'low' && price < LOW_PRICE) {
     return true;
   }
-  if (typeOfPrice === 'middle' && price <= 50000 && price >= 10000) {
+  if (typeOfPrice === 'middle' && price <= MIDDLE_PRICE && price >= LOW_PRICE) {
     return true;
   }
-  if (typeOfPrice === 'high' && price > 50000) {
+  if (typeOfPrice === 'high' && price > MIDDLE_PRICE) {
     return true;
   }
   if (typeOfPrice === 'any') {
@@ -64,7 +68,7 @@ const filterPlaces = (places) => {
     if (filter) {
       filteredPlaces.push(place);
     }
-    if (filteredPlaces.length >= 10) {
+    if (filteredPlaces.length >= NUMBER_OF_PLACES) {
       break;
     }
   }

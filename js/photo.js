@@ -1,4 +1,7 @@
 const IMG_FILE_TYPES = [ 'img', 'png', 'jpeg', 'jpg'];
+const PHOTO_WIDTH = 40;
+const PHOTO_HEIGHT = 44;
+
 
 const adFormField = document.querySelector('.ad-form__field input[type=file]');
 const adFormHeaderPreview = document.querySelector('.ad-form-header__preview');
@@ -16,29 +19,35 @@ const preparePhoto = (button) => {
   }
 };
 
-const changePhoto = () => {
+const onChangePhoto = () => {
   const src = preparePhoto(adFormField);
   if (src) {
     imgForm.src = src;
   }
 };
 
-const addPhoto = () => {
+const onAddPhoto = () => {
   const imgElement = document.createElement('img');
   const src = preparePhoto(adFormUpload);
   if (src) {
     imgElement.src = src;
   }
-  imgElement.width = 40;
-  imgElement.height = 44;
+  imgElement.width = PHOTO_WIDTH;
+  imgElement.height = PHOTO_HEIGHT;
   const photo = adFormPhoto.cloneNode();
   photo.appendChild(imgElement);
   adFormPhotoContainer.appendChild(photo);
 };
 
+const adFormFieldChange = () => {
+  adFormField.addEventListener('change', onChangePhoto);
+};
+const adFormUploadAdd = () => {
+  adFormUpload.addEventListener('change', onAddPhoto);
+};
 const doAllActionsWithPhoto = () => {
-  adFormUpload.addEventListener('change', changePhoto);
-  adFormField.addEventListener('change', addPhoto);
+  adFormFieldChange();
+  adFormUploadAdd();
 };
 
 export {doAllActionsWithPhoto};
