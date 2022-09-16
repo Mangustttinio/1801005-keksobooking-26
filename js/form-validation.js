@@ -79,7 +79,7 @@ const initFormValidation = () => {
     'от 30 до 100 символов'
   );
   pristine.addValidator(
-    selectPriceType,
+    form.querySelector('#price'),
     validatePrice,
     'превышено допустимое значение цены'
   );

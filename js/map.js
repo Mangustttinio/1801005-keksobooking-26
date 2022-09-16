@@ -57,21 +57,24 @@ const resetMap = (hotels) => {
   mainPinMarker.setLatLng(START_COORDINATES);
   markerGroup.closePopup();
   markerGroup.clearLayers();
+  hotels = hotels.slice(0, HOTEL_NUMBER);
   hotels.forEach((hotel) => setHotelMarker(hotel));
 };
 
-const initMap = (hotels) => {
-  getMap ();
-
-  hotels = hotels.slice(0, HOTEL_NUMBER);
-
-  resetMap(hotels);
-  mainPinMarker.on('moveend', changeAddressField);
+const initListeners = (hotels) => {
   adForm.addEventListener('reset', () => resetMap(hotels));
+};
+
+const initMap = (cb) => {
+  getMap();
+
+  // 2. если карта создана вызываем getData
+  map.on('load', cb).setView(START_COORDINATES, START_SCALE);
+  mainPinMarker.on('moveend', changeAddressField);
 
   tileLayer.addTo(map);
   mainPinMarker.addTo(map);
   markerGroup.addTo(map);
 };
 
-export {initMap};
+export {initMap, initListeners, resetMap};

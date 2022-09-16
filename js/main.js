@@ -3,7 +3,9 @@ import {
   regulateButtons
 } from './form-validation.js';
 import {
-  initMap
+  initMap,
+  initListeners,
+  resetMap
 } from './map.js';
 import {
   getPriceFromSlider
@@ -28,19 +30,18 @@ import {
   doAllActionsWithPhoto
 } from './photo.js';
 
-
 const form = document.querySelector('.ad-form');
+
+getData((ads) => {
+  initMap(ads);
+  getFilteredMap(ads);
+}, showAlert);
 
 initFormValidation();
 
 regulateButtons();
 
 getPriceFromSlider();
-
-getData((ads) => {
-  initMap(ads);
-  getFilteredMap(ads);
-}, showAlert);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();

@@ -1,4 +1,4 @@
-import { initMap } from './map.js';
+import { resetMap } from './map.js';
 import { debounce } from './utils.js';
 
 const LOW_PRICE = 10000;
@@ -78,7 +78,7 @@ const filterPlaces = (places) => {
 const getFilteredMap = (places) => {
   mapFilter.addEventListener('change', debounce(() => {
     const filteredPlaces = filterPlaces(places);
-    initMap(filteredPlaces);
+    resetMap(filteredPlaces);
   }));
 };
 
