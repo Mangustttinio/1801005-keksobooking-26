@@ -67,8 +67,6 @@ const initListeners = (hotels) => {
 
 const initMap = (cb) => {
   getMap();
-
-  // 2. если карта создана вызываем getData
   map.on('load', cb).setView(START_COORDINATES, START_SCALE);
   mainPinMarker.on('moveend', changeAddressField);
 

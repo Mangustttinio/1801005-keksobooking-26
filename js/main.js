@@ -26,22 +26,21 @@ import {
 import {
   pristine
 } from './form-validation.js';
-import {
-  doAllActionsWithPhoto
-} from './photo.js';
+
 
 const form = document.querySelector('.ad-form');
-
-getData((ads) => {
-  initMap(ads);
-  getFilteredMap(ads);
-}, showAlert);
 
 initFormValidation();
 
 regulateButtons();
 
 getPriceFromSlider();
+
+initMap(() => getData((ads) => {
+  getFilteredMap(ads);
+  initListeners(ads);
+  resetMap(ads);
+}, showAlert));
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -55,4 +54,3 @@ form.addEventListener('submit', (evt) => {
 
 clickResetButton();
 
-doAllActionsWithPhoto();
