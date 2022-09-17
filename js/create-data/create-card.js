@@ -51,13 +51,13 @@ const createPopupElement = (ads) => {
   setCardAttribute('.popup__description', ads.offer.description);
   setCardAttribute('.popup__avatar', ads.author.avatar, 'src');
   cardNode.querySelector('.popup__features').innerHTML = '';
-  if (ads.offer.features === undefined) {
+  if (!ads.offer.features) {
     cardNode.querySelector('.popup__features').append('');
   } else {
     cardNode.querySelector('.popup__features').append(...createElements(ads.offer.features, createFeatureElement));
   }
   cardNode.querySelector('.popup__photos').innerHTML = '';
-  if (ads.offer.photos === undefined) {
+  if (!ads.offer.photos) {
     cardNode.querySelector('.popup__photos').append('');
   } else {
     cardNode.querySelector('.popup__photos').append(...createElements(ads.offer.photos, createPhotoElement));
