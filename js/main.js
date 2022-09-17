@@ -5,7 +5,8 @@ import {
 import {
   initMap,
   initListeners,
-  resetMap
+  resetMap,
+  enableForm
 } from './map.js';
 import {
   getPriceFromSlider
@@ -26,21 +27,24 @@ import {
 import {
   pristine
 } from './form-validation.js';
-
+import {
+  formDeactivation
+} from './form-conditions.js';
 
 const form = document.querySelector('.ad-form');
-
 initFormValidation();
 
 regulateButtons();
 
 getPriceFromSlider();
 
-initMap(() => getData((ads) => {
-  getFilteredMap(ads);
-  initListeners(ads);
-  resetMap(ads);
-}, showAlert));
+initMap(() => {
+  formDeactivation();
+  getData((ads) => {
+    getFilteredMap(ads);
+    initListeners(ads);
+    resetMap(ads);
+  }, showAlert);});
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();

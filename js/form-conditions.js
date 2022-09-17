@@ -7,10 +7,10 @@ const formDeactivation = () => {
   formType.classList.add('ad-form__disabled');
   mapFilterType.classList.add('map__filters--disabled');
   for (const value of mapFilterChildren) {
-    value.setAttribute('disabled', '');
+    value.setAttribute('disabled', 'true');
   }
   for (const value of formChildren) {
-    value.setAttribute('disabled', '');
+    value.setAttribute('disabled', 'true');
   }
 };
 
