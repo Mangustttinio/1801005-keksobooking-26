@@ -6,7 +6,6 @@ import {
   initMap,
   initListeners,
   resetMap,
-  enableForm
 } from './map.js';
 import {
   getPriceFromSlider

@@ -1,5 +1,5 @@
 import { createPopupElement } from './create-data/create-card.js';
-import { formActivation, formDeactivation } from './form-conditions.js';
+import { formActivation} from './form-conditions.js';
 
 const START_COORDINATES = {
   lat: 35.68485,
