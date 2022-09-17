@@ -47,7 +47,7 @@ const getSuccessMessage = () => {
       successMessage.remove();
     }
   });
-  form.addEventListener('click', () => {
+  document.addEventListener('click', () => {
     successMessage.remove();
   });
   form.reset();

@@ -77,6 +77,7 @@ const initMap = (cb) => {
   tileLayer.addTo(map);
   mainPinMarker.addTo(map);
   markerGroup.addTo(map);
+  addressField.value = `${START_COORDINATES.lat}, ${START_COORDINATES.lng}`;
 };
 
 export {initMap, initListeners, resetMap, enableForm};

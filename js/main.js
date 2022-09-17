@@ -29,6 +29,7 @@ import {
 import {
   formDeactivation
 } from './form-conditions.js';
+import { doAllActionsWithPhoto } from './photo.js';
 
 const form = document.querySelector('.ad-form');
 initFormValidation();
@@ -54,6 +55,8 @@ form.addEventListener('submit', (evt) => {
   }
 }
 );
+
+doAllActionsWithPhoto();
 
 clickResetButton();
 
