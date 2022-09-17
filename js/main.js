@@ -3,7 +3,9 @@ import {
   regulateButtons
 } from './form-validation.js';
 import {
-  initMap
+  initMap,
+  initListeners,
+  resetMap,
 } from './map.js';
 import {
   getPriceFromSlider
@@ -25,22 +27,23 @@ import {
   pristine
 } from './form-validation.js';
 import {
-  doAllActionsWithPhoto
-} from './photo.js';
-
+  formDeactivation
+} from './form-conditions.js';
 
 const form = document.querySelector('.ad-form');
-
 initFormValidation();
 
 regulateButtons();
 
 getPriceFromSlider();
 
-getData((ads) => {
-  initMap(ads);
-  getFilteredMap(ads);
-}, showAlert);
+initMap(() => {
+  formDeactivation();
+  getData((ads) => {
+    getFilteredMap(ads);
+    initListeners(ads);
+    resetMap(ads);
+  }, showAlert);});
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -54,4 +57,3 @@ form.addEventListener('submit', (evt) => {
 
 clickResetButton();
 
-doAllActionsWithPhoto();

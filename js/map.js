@@ -1,4 +1,5 @@
 import { createPopupElement } from './create-data/create-card.js';
+import { formActivation} from './form-conditions.js';
 
 const START_COORDINATES = {
   lat: 35.68485,
@@ -36,7 +37,7 @@ const mainPinMarker = L.marker (
 
 const getMap = () => {
   if (!map) {
-    map = L.map('map-canvas').setView(START_COORDINATES, START_SCALE);
+    map = L.map('map-canvas');
   }
   return map;
 };
@@ -57,21 +58,25 @@ const resetMap = (hotels) => {
   mainPinMarker.setLatLng(START_COORDINATES);
   markerGroup.closePopup();
   markerGroup.clearLayers();
+  hotels = hotels.slice(0, HOTEL_NUMBER);
   hotels.forEach((hotel) => setHotelMarker(hotel));
 };
 
-const initMap = (hotels) => {
-  getMap ();
-
-  hotels = hotels.slice(0, HOTEL_NUMBER);
-
-  resetMap(hotels);
-  mainPinMarker.on('moveend', changeAddressField);
+const initListeners = (hotels) => {
   adForm.addEventListener('reset', () => resetMap(hotels));
+};
 
+const enableForm = () => {
+  map.on('load', formActivation);
+};
+const initMap = (cb) => {
+  getMap();
+  map.on('load', formActivation).setView(START_COORDINATES, START_SCALE);
+  mainPinMarker.on('moveend', changeAddressField);
+  map.on('load', cb);
   tileLayer.addTo(map);
   mainPinMarker.addTo(map);
   markerGroup.addTo(map);
 };
 
-export {initMap};
+export {initMap, initListeners, resetMap, enableForm};

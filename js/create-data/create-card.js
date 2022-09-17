@@ -41,23 +41,27 @@ const setAttribute = (element) => (selector, data, attr = 'textContent') => {
 const createPopupElement = (ads) => {
   const cardNode = cardTemplate.cloneNode(true);
   const setCardAttribute = setAttribute(cardNode);
-  setCardAttribute('popup__title', ads.offer.title);
   setCardAttribute('.popup__title', ads.offer.title);
+  setCardAttribute('.popup__type', housingTypes[ads.offer.type]);
   setCardAttribute('.popup__text--address', ads.offer.address);
   setCardAttribute('.popup__text--price', `${ads.offer.price}₽/ночь`);
   setCardAttribute('.popup__type', housingTypes[ads.offer.types]);
-  setCardAttribute('.popup__text--capacity', `Заезд после ${ads.offer.checkin}, выезд до ${ads.offer.checkout}`);
+  setCardAttribute('.popup__text--capacity', `${(ads.offer.rooms === 1) ? `${ads.offer.rooms} комната` : `${ads.offer.rooms} комнаты`} для ${(ads.offer.guests === 1) ? `${ads.offer.guests} гостя` : `${ads.offer.guests}`}`);
+  setCardAttribute('.popup__text--time', `Заезд после ${ads.offer.checkin}, выезд до ${ads.offer.checkout}`);
   setCardAttribute('.popup__description', ads.offer.description);
   setCardAttribute('.popup__avatar', ads.author.avatar, 'src');
-
   cardNode.querySelector('.popup__features').innerHTML = '';
-  if (ads.offer.feature === undefined) {
+  if (!ads.offer.features) {
     cardNode.querySelector('.popup__features').append('');
   } else {
     cardNode.querySelector('.popup__features').append(...createElements(ads.offer.features, createFeatureElement));
   }
   cardNode.querySelector('.popup__photos').innerHTML = '';
-  cardNode.querySelector('.popup__photos').append(...createElements(ads.offer.photos, createPhotoElement));
+  if (!ads.offer.photos) {
+    cardNode.querySelector('.popup__photos').append('');
+  } else {
+    cardNode.querySelector('.popup__photos').append(...createElements(ads.offer.photos, createPhotoElement));
+  }
   return cardNode;
 };
 
