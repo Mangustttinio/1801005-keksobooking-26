@@ -26,10 +26,8 @@ import {
 import {
   pristine
 } from './form-validation.js';
-import {
-  formDeactivation
-} from './form-conditions.js';
 import { doAllActionsWithPhoto } from './photo.js';
+import { formDeactivation, formActivation } from './form-conditions.js';
 
 const form = document.querySelector('.ad-form');
 initFormValidation();
@@ -37,10 +35,10 @@ initFormValidation();
 regulateButtons();
 
 getPriceFromSlider();
-
+formDeactivation();
 initMap(() => {
-  formDeactivation();
   getData((ads) => {
+    formActivation();
     getFilteredMap(ads);
     initListeners(ads);
     resetMap(ads);

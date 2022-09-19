@@ -3,6 +3,7 @@ const mapFilterType = document.querySelector('.map__filters');
 const mapFilterChildren = mapFilterType.children;
 const formChildren = formType.children;
 
+
 const formDeactivation = () => {
   formType.classList.add('ad-form__disabled');
   mapFilterType.classList.add('map__filters--disabled');
@@ -24,5 +25,6 @@ const formActivation = () => {
     value.removeAttribute('disabled');
   }
 };
+
 
 export {formActivation, formDeactivation};

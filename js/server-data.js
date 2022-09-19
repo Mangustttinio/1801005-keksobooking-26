@@ -9,13 +9,18 @@ const getData = (onSuccess, onError) => {
 
 const sendData = (formData, onSuccess, onError) => {
   fetch(
-    'https://26.javascript.pages.academy/keksobooking',
+    'https://26.javascript.pages.academy/keksobookin',
     {
       method: 'POST',
       body: formData,
     },
-  ).then(onSuccess)
-    .catch(onError);
+  ).then((response) => {
+    if (response.ok) {
+      onSuccess();
+    } else {
+      onError();
+    }
+  }).catch(onError);
 };
 
 export {

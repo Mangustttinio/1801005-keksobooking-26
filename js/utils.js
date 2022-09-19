@@ -51,6 +51,7 @@ const getSuccessMessage = () => {
     successMessage.remove();
   });
   form.reset();
+  document.removeEventListener('click', () => {});
   document.removeEventListener('keydown', () => {});
 };
 

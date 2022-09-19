@@ -17,18 +17,10 @@ const filterHousingType = (place) => housingType.value === place.offer.type || h
 const filterHousingPrice = (place) => {
   const price = place.offer.price;
   const typeOfPrice = housingPrice.value;
-  if (typeOfPrice === 'low' && price < LOW_PRICE) {
-    return true;
-  }
-  if (typeOfPrice === 'middle' && price <= MIDDLE_PRICE && price >= LOW_PRICE) {
-    return true;
-  }
-  if (typeOfPrice === 'high' && price > MIDDLE_PRICE) {
-    return true;
-  }
-  if (typeOfPrice === 'any') {
-    return true;
-  }
+  return (typeOfPrice === 'low' && price < LOW_PRICE) ||
+  (typeOfPrice === 'middle' && price <= MIDDLE_PRICE && price >= LOW_PRICE) ||
+  (typeOfPrice === 'high' && price > MIDDLE_PRICE) ||
+  (typeOfPrice === 'any');
 };
 
 const filterHousingRooms = (place) => {

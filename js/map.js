@@ -1,6 +1,5 @@
 import { createPopupElement } from './create-data/create-card.js';
 import { formActivation} from './form-conditions.js';
-
 const START_COORDINATES = {
   lat: 35.68485,
   lng: 139.753777,
@@ -71,7 +70,7 @@ const enableForm = () => {
 };
 const initMap = (cb) => {
   getMap();
-  map.on('load', formActivation).setView(START_COORDINATES, START_SCALE);
+  map.on('load', cb).setView(START_COORDINATES, START_SCALE);
   mainPinMarker.on('moveend', changeAddressField);
   map.on('load', cb);
   tileLayer.addTo(map);

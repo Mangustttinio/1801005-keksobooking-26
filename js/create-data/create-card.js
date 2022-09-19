@@ -46,7 +46,7 @@ const createPopupElement = (ads) => {
   setCardAttribute('.popup__text--address', ads.offer.address);
   setCardAttribute('.popup__text--price', `${ads.offer.price}₽/ночь`);
   setCardAttribute('.popup__type', housingTypes[ads.offer.types]);
-  setCardAttribute('.popup__text--capacity', `${(ads.offer.rooms === 1) ? `${ads.offer.rooms} комната` : `${ads.offer.rooms} комнаты`} для ${(ads.offer.guests === 1) ? `${ads.offer.guests} гостя` : `${ads.offer.guests}`}`);
+  setCardAttribute('.popup__text--capacity', `${(ads.offer.rooms === 1) ? `${ads.offer.rooms} комната` : `${ads.offer.rooms} комнаты`} для ${(ads.offer.guests === 1) ? `${ads.offer.guests} гостя` : `${ads.offer.guests} гостей`}`);
   setCardAttribute('.popup__text--time', `Заезд после ${ads.offer.checkin}, выезд до ${ads.offer.checkout}`);
   setCardAttribute('.popup__description', ads.offer.description);
   setCardAttribute('.popup__avatar', ads.author.avatar, 'src');
