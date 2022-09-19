@@ -46,17 +46,17 @@ const getSuccessMessage = () => {
     if(event.key === 'Escape'){
       successMessage.remove();
     }
+    document.removeEventListener('click', onClick);
     document.removeEventListener('keydown', onKeydownEsc);
   };
-  const onClick = () => {
+  function onClick() {
     successMessage.remove();
     document.removeEventListener('click', onClick);
-  };
+    document.removeEventListener('keydown', onKeydownEsc);
+  }
   document.addEventListener('click', onClick);
   document.addEventListener('keydown', onKeydownEsc);
   form.reset();
-  document.removeEventListener('click', onClick);
-  document.removeEventListener('keydown', onKeydownEsc);
 };
 
 const prepareErrorMessage = () => {
