@@ -35,7 +35,6 @@ initFormValidation();
 regulateButtons();
 
 getPriceFromSlider();
-formDeactivation();
 initMap(() => {
   getData((ads) => {
     formActivation();
