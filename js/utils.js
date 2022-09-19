@@ -41,18 +41,22 @@ const prepareSuccessMessage = () => {
 const getSuccessMessage = () => {
   const successMessage = prepareSuccessMessage();
   document.body.append(successMessage);
-  document.addEventListener('keydown', (event) => {
+  const onKeydownEsc = (event) => {
     event.preventDefault();
     if(event.key === 'Escape'){
       successMessage.remove();
     }
-  });
-  document.addEventListener('click', () => {
+    document.removeEventListener('keydown', onKeydownEsc);
+  };
+  const onClick = () => {
     successMessage.remove();
-  });
+    document.removeEventListener('click', onClick);
+  };
+  document.addEventListener('click', onClick);
+  document.addEventListener('keydown', onKeydownEsc);
   form.reset();
-  document.removeEventListener('click', () => {});
-  document.removeEventListener('keydown', () => {});
+  document.removeEventListener('click', onClick);
+  document.removeEventListener('keydown', onKeydownEsc);
 };
 
 const prepareErrorMessage = () => {

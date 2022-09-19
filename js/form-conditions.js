@@ -17,7 +17,7 @@ const formDeactivation = () => {
 
 const formActivation = () => {
   formType.classList.remove('ad-form--disabled');
-  mapFilterType.classList.remove('map__filter--disabled');
+  mapFilterType.classList.remove('map__filters--disabled');
   for (const value of mapFilterChildren) {
     value.removeAttribute('disabled');
   }

@@ -33,7 +33,7 @@ const form = document.querySelector('.ad-form');
 initFormValidation();
 
 regulateButtons();
-
+formDeactivation();
 getPriceFromSlider();
 initMap(() => {
   getData((ads) => {
