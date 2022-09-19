@@ -14,8 +14,13 @@ const sendData = (formData, onSuccess, onError) => {
       method: 'POST',
       body: formData,
     },
-  ).then(onSuccess)
-    .catch(onError);
+  ).then((response) => {
+    if (response.ok) {
+      onSuccess();
+    } else {
+      onError();
+    }
+  }).catch(onError);
 };
 
 export {

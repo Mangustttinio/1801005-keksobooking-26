@@ -3,6 +3,7 @@ const mapFilterType = document.querySelector('.map__filters');
 const mapFilterChildren = mapFilterType.children;
 const formChildren = formType.children;
 
+
 const formDeactivation = () => {
   formType.classList.add('ad-form__disabled');
   mapFilterType.classList.add('map__filters--disabled');
@@ -16,7 +17,7 @@ const formDeactivation = () => {
 
 const formActivation = () => {
   formType.classList.remove('ad-form--disabled');
-  mapFilterType.classList.remove('map__filter--disabled');
+  mapFilterType.classList.remove('map__filters--disabled');
   for (const value of mapFilterChildren) {
     value.removeAttribute('disabled');
   }
@@ -24,5 +25,6 @@ const formActivation = () => {
     value.removeAttribute('disabled');
   }
 };
+
 
 export {formActivation, formDeactivation};

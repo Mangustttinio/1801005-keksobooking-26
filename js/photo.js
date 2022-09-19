@@ -37,6 +37,10 @@ const onAddPhoto = () => {
   const photo = adFormPhoto.cloneNode();
   photo.appendChild(imgElement);
   adFormPhotoContainer.appendChild(photo);
+  const photoDivs = adFormPhotoContainer.querySelectorAll('.ad-form__photo');
+  if (!photoDivs[0].src) {
+    photoDivs[0].remove();
+  }
 };
 
 const adFormFieldChange = () => {
